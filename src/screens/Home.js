@@ -13,7 +13,13 @@ export default function Home() {
       <div>
         <Carousal />
       </div>
-      <div>
+      <div className="m-3">
+        <Card />
+      </div>
+      <div className="m-3">
+        <Card />
+      </div>
+      <div className="m-3">
         <Card />
       </div>
 

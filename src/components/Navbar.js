@@ -6,8 +6,12 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <Link className="navbar-brand fs-2 fst-italic" to="/">
-            6TEEN Foods
+          <Link className="navbar-brand fs-3 fst-italic" to="/">
+            <img
+              src="https://i.ibb.co/qJfvHWr/Red-Beige-Bold-Bar-Restaurant-Logo-2.png[/img][/url]"
+              alt="The 6TEEN Flavours"
+              style={{ height: "50px", width: "120px" }}
+            />
           </Link>
           <button
             className="navbar-toggler"
@@ -23,13 +27,18 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="#">
+                <Link className="nav-link " aria-current="page" to="#">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/login">
                   Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">
+                  SignUp
                 </Link>
               </li>
             </ul>

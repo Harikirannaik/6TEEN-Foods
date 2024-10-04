@@ -1,32 +1,30 @@
-import React, { useState } from 'react'
-import { Link , useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Login() {
-
+export default function Signup() {
   const [credentials, setCredentials] = useState({
-    
+    name: "",
     email: "",
-    password: ""
-    
+    password: "",
+    location: "",
   });
-  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(JSON.stringify({
+      console.log(JSON.stringify({name: credentials.name,
         email: credentials.email,
-        password: credentials.password
-      }))
-    const response = await fetch("http://localhost:3100/api/login", {
+        password: credentials.password,
+        location: credentials.location}))
+    const response = await fetch("http://localhost:3100/api/createuser", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        
+        name: credentials.name,
         email: credentials.email,
         password: credentials.password,
-        
+        location: credentials.location
       })
     });
     const json = await response.json();
@@ -35,22 +33,28 @@ export default function Login() {
     if (!json.success) {
       alert("Enter valid credentials");
     }
-    if (json.success) {
-      navigate('/');
-    }
-    
   };
 
   const onChange = (event) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
 
-
   return (
-    
+    <>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={credentials.name}
+              onChange={onChange}
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
@@ -78,16 +82,27 @@ export default function Login() {
               onChange={onChange}
             />
           </div>
-          
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Address
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="location"
+              value={credentials.location}
+              onChange={onChange}
+            />
+          </div>
 
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          <Link to="/signup" className="m-3 btn btn-warning">
-            I'm a new user
+          <Link to="/login" className="m-3 btn btn-warning">
+            Already a user
           </Link>
         </form>
       </div>
-    
-  )
+    </>
+  );
 }
