@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api', require("./Routes/CreateUser"));
-
+app.use('/api', require("./Routes/DisplayData"));
 // Simple test route
 app.get("/", (req, res) => {
   res.send("Hello World");

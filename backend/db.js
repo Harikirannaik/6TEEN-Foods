@@ -5,23 +5,24 @@ const mongoURI =
 
 const mongoDB = async () => {
   try {
-    // Just await the connection without deprecated options
-    await mongoose.connect(mongoURI);
+    // Await the connection without deprecated options
+    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
     console.log("Connected to DB successfully");
 
     // Fetch the 'food_items' collection
-    const fetched_data = await mongoose.connection.db.collection("food_items");
+    const fetched_data = await mongoose.connection.db.collection("food_items").find({}).toArray();
 
-    // Fetch all documents and log them
-    const data = await fetched_data.find({}).toArray();
-    if (data.length === 0) {
-      console.log("No data found in the collection");
-    } else {
-      // console.log("Data:", data);
-    }
+    // Fetch the 'foodCategory' collection
+    const foodCategoryData = await mongoose.connection.db.collection("foodCategory").find({}).toArray();
+
+    // Assign data globally
+    global.food_items = fetched_data;
+    global.foodCategory = foodCategoryData;
+
+    console.log("Data fetched and assigned to global variables");
   } catch (error) {
-    console.error("Error connecting to the database:", error);
+    console.error("Error connecting to the database or fetching data:", error);
   }
 };
 

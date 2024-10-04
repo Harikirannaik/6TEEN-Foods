@@ -1,33 +1,31 @@
-import React, { useState } from 'react'
-import { Link , useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Login() {
-
   const [credentials, setCredentials] = useState({
-    
     email: "",
-    password: ""
-    
+    password: "",
   });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(JSON.stringify({
+    e.preventDefault();
+    console.log(
+      JSON.stringify({
         email: credentials.email,
-        password: credentials.password
-      }))
+        password: credentials.password,
+      })
+    );
     const response = await fetch("http://localhost:3100/api/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        
         email: credentials.email,
         password: credentials.password,
-        
-      })
+      }),
     });
     const json = await response.json();
     console.log(json);
@@ -36,21 +34,20 @@ export default function Login() {
       alert("Enter valid credentials");
     }
     if (json.success) {
-      navigate('/');
+      localStorage.setItem("authToken", json.authToken);
+      console.log(localStorage.getItem("authToken"));
+      navigate("/");
     }
-    
   };
 
   const onChange = (event) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
 
-
   return (
-    
+    <>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
@@ -78,7 +75,6 @@ export default function Login() {
               onChange={onChange}
             />
           </div>
-          
 
           <button type="submit" className="btn btn-primary">
             Submit
@@ -88,6 +84,6 @@ export default function Login() {
           </Link>
         </form>
       </div>
-    
-  )
+    </>
+  );
 }

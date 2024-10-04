@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 export default function Signup() {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -41,6 +42,7 @@ export default function Signup() {
 
   return (
     <>
+      
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

@@ -1,16 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Badge from "react-bootstrap/badge";
+import { useCart } from "./ContextReducer";
+import Modal from "../Modal";
+import Cart from "../screens/Cart";
 
 export default function Navbar() {
+
+  const [cartView, setCartView] = useState(false);
+  let data = useCart();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-warning">
         <div className="container-fluid">
           <Link className="navbar-brand fs-3 fst-italic" to="/">
             <img
-              src="https://i.ibb.co/qJfvHWr/Red-Beige-Bold-Bar-Restaurant-Logo-2.png[/img][/url]"
+              src="https://i.ibb.co/fYN5T57/Red-Beige-Bold-Bar-Restaurant-Logo-2.png[/img][/url]"
               alt="The 6TEEN Flavours"
-              style={{ height: "50px", width: "120px" }}
+              style={{ height: "45px", width: "130px" }}
             />
           </Link>
           <button
@@ -25,23 +38,57 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav me-auto mb-2">
               <li className="nav-item">
-                <Link className="nav-link " aria-current="page" to="#">
+                <Link
+                  className="nav-link active fs-5 text-dark"
+                  aria-current="page"
+                  to="#"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
+              {localStorage.getItem("authToken") ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active fs-5 text-dark"
+                    aria-current="page"
+                    to="/"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+            {!localStorage.getItem("authToken") ? (
+              <div className="d-flex">
+                <Link className="btn bg-dark text-white mx-1" to="/login">
                   Login
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
+
+                <Link className="btn bg-dark text-white mx-1" to="/signup">
                   SignUp
                 </Link>
-              </li>
-            </ul>
+              </div>
+            ) : (
+              <div>
+                <div className="btn bg-dark text-white mx-2" onClick={()=>{setCartView(true)}}>
+                  My Cart{" "}
+                  <Badge pill bg="danger">
+                    {data.length}
+                  </Badge>
+                  </div>
+                  {cartView? <Modal onClose={()=>setCartView(false)}><Cart/></Modal>:null}
+                <div
+                  className="btn bg-danger text-white mx-2"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
