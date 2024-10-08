@@ -133,8 +133,8 @@ export default function Home() {
                             className="col-12 col-md-6 col-lg-4"
                           >
                             <Card
+                              foodItem={filterItems} // Pass filterItems as foodItem
                               foodName={filterItems.name}
-                              item={filterItems}
                               options={filterItems.options[0]}
                               ImgSrc={filterItems.img}
                             ></Card>

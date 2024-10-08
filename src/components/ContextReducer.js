@@ -14,17 +14,36 @@ const reducer = (state, action) => {
           qty: action.qty,
           size: action.size,
           price: action.price,
-          img: action.img
-        }
+          img: action.img,
+        },
       ];
+
     case "REMOVE":
-      let newArr = [...state]
-      newArr.splice(action.index, 1)
+      let newArr = [...state];
+      newArr.splice(action.index, 1);
       return newArr;
+
+    case "UPDATE":
+      let updatedArr = state.map((food) => {
+        if (food.id === action.id && food.size === action.size) {
+          // Update the existing item with new quantity and price
+          return {
+            ...food,
+            qty: food.qty + parseInt(action.qty), // Increment quantity by the new qty
+            price: food.price + action.price,     // Increment price by the new item's price
+          };
+        }
+        return food;
+      });
+      return updatedArr;
+
     default:
       console.log("Error in Reducer");
+      return state;
   }
 };
+
+
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);

@@ -1,84 +1,61 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useCart } from "./ContextReducer";
-// import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'
 export default function Card(props) {
   let data = useCart();
-
-  let navigate = useNavigate();
-  const [qty, setQty] = useState(1);
-  const [size, setSize] = useState("");
   const priceRef = useRef();
-  // const [btnEnable, setBtnEnable] = useState(false);
-  // let totval = 0
-  // let price = Object.values(options).map((value) => {
-  //   return parseInt(value, 10);
-  // });
   let options = props.options;
   let priceOptions = Object.keys(options);
-  let foodItem = props.item;
   const dispatch = useDispatch();
+  let navigate = useNavigate()
+  const [qty, setQty] = useState(1);
+  const [size, setSize] = useState("");
+  
   const handleClick = () => {
     if (!localStorage.getItem("token")) {
-      navigate("/login");
+      navigate("/login")
     }
-  };
+  }
   const handleQty = (e) => {
     setQty(e.target.value);
-  };
+  }
   const handleOptions = (e) => {
     setSize(e.target.value);
-  };
+  }
+
   const handleAddToCart = async () => {
-    let food = [];
-    for (const item of data) {
-      if (item.id === foodItem._id) {
-        food = item;
-
-        break;
-      }
+    // Find the item in the cart with the same ID and size
+    let food = data.find((item) => item.id === props.foodItem._id && item.size === size);
+  
+    if (food) {
+      // If the food with the same size already exists, update the quantity and price
+      await dispatch({
+        type: "UPDATE",
+        id: props.foodItem._id,
+        size: size,         // Include size in the update
+        price: finalPrice,  // Ensure the price is correctly calculated based on the qty and size
+        qty: qty,           // New quantity to be added
+      });
+    } else {
+      // If the size is different or the food is not in the cart, add it as a new item
+      await dispatch({
+        type: "ADD",
+        id: props.foodItem._id,
+        name: props.foodItem.name,
+        price: finalPrice,
+        qty: qty,
+        size: size,
+      });
     }
-    console.log(food);
-    console.log(new Date());
-    if (food !== []) {
-      if (food.size === size) {
-        await dispatch({
-          type: "UPDATE",
-          id: foodItem._id,
-          price: finalPrice,
-          qty: qty,
-        });
-        return;
-      } else if (food.size !== size) {
-        await dispatch({
-          type: "ADD",
-          id: foodItem._id,
-          name: foodItem.name,
-          price: finalPrice,
-          qty: qty,
-          size: size,
-          img: props.ImgSrc,
-        });
-        console.log("Size different so simply ADD one more to the list");
-        return;
-      }
-      return;
-    }
-
-    await dispatch({
-      type: "ADD",
-      id: foodItem._id,
-      name: foodItem.name,
-      price: finalPrice,
-      qty: qty,
-      size: size,
-    });
-
-    // setBtnEnable(true)
   };
+  
+  
+  
+
 
   useEffect(() => {
     setSize(priceRef.current.value);
+    
   }, []);
 
   // useEffect(()=>{
@@ -141,7 +118,6 @@ export default function Card(props) {
           >
             Add to Cart
           </button>
-          {/* <button className={`btn btn-danger justify-center ms-2 ${btnEnable ? "" : "disabled"}`} onClick={handleRemoveCart}>Remove</button> */}
         </div>
       </div>
     </div>
