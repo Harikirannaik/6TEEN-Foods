@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./screens/Home";
+import MyOrder from "./screens/MyOrder.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/myOrder" element={<MyOrder />} />
           </Routes>
         </div>
       </Router>

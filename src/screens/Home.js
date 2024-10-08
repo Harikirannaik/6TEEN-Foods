@@ -58,19 +58,20 @@ export default function Home() {
             </div>
             <div className="carousel-item active">
               <img
-                src="https://i.ibb.co/4Z4DRZK/South-Indian-Food-Cooking-You-Tube-Banner-in-Green-and-Grey-Photocentric-Style.png[/img][/url]
-              [url=https://imgbb.com/]png images[/url]"
+                src="https://i.ibb.co/LxXw4n1/starter.jpg[/img][/url]
+                [url=https://imgbb.com/]upload picture without account[/url]"
                 className="d-block w-100"
                 alt="..."
                 style={{
-                  filter: "brightness(60%)",
-                  maxHeight: "400px",
+                  filter: "brightness(80%)",
+                  maxHeight: "400px"
                 }}
               />
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.ibb.co/4Z4DRZK/South-Indian-Food-Cooking-You-Tube-Banner-in-Green-and-Grey-Photocentric-Style.png[/img][/url]"
+                src="https://i.ibb.co/NF0j0pj/pizza.jpg[/img][/url]
+                [url=https://imgbb.com/]upload picture without account[/url]"
                 className="d-block w-100"
                 alt="..."
                 style={{ filter: "brightness(60%)", maxHeight: "400px" }}
@@ -78,7 +79,8 @@ export default function Home() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.ibb.co/4Z4DRZK/South-Indian-Food-Cooking-You-Tube-Banner-in-Green-and-Grey-Photocentric-Style.png[/img][/url]"
+                src="https://i.ibb.co/Pckth7G/biryani.jpg[/img][/url]
+                [url=https://imgbb.com/]upload picture without account[/url]"
                 className="d-block w-100"
                 alt="..."
                 style={{ filter: "brightness(60%)", maxHeight: "400px" }}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -34,6 +34,7 @@ export default function Login() {
       alert("Enter valid credentials");
     }
     if (json.success) {
+      localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("authToken", json.authToken);
       console.log(localStorage.getItem("authToken"));
       navigate("/");
@@ -45,7 +46,10 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div style={{backgroundImage: 'url("https://images.pexels.com/photos/326278/pexels-photo-326278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")', height: '100vh', backgroundSize: 'cover'}}>
+      <div>
+        <Navbar />
+      </div>
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -76,7 +80,7 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-success">
             Submit
           </button>
           <Link to="/signup" className="m-3 btn btn-warning">
@@ -84,6 +88,7 @@ export default function Login() {
           </Link>
         </form>
       </div>
-    </>
+    </div>
+    
   );
 }

@@ -39,7 +39,7 @@ export default function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link
                   className="nav-link active fs-5 text-dark"
                   aria-current="page"
@@ -47,13 +47,13 @@ export default function Navbar() {
                 >
                   Home
                 </Link>
-              </li>
+              </li> */}
               {localStorage.getItem("authToken") ? (
                 <li className="nav-item">
                   <Link
                     className="nav-link active fs-5 text-dark"
                     aria-current="page"
-                    to="/"
+                    to="/myOrder"
                   >
                     My Orders
                   </Link>
