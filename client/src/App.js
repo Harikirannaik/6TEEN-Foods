@@ -10,6 +10,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import Signup from "./screens/Signup.js";
 import { CartProvider } from "./components/ContextReducer.js";
 
+
 function App() {
   return (
     <CartProvider>

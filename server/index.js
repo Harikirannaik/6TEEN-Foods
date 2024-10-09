@@ -7,7 +7,7 @@ const cors = require('cors');
 mongoDB();
 
 app.use(cors({
-  origin: ["https://6-teen-foods-backend.vercel.app", "http://localhost:3000"],
+  origin: ["https://6-teen-foods.vercel.app/", "http://localhost:3000"],
   methods: ["POST", "GET"],
   credentials: true
 }));
