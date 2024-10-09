@@ -5,20 +5,16 @@ const mongoURI = process.env.MONGODB_URI; // Use the URI from .env
 
 const mongoDB = async () => {
   try {
-    // Await the connection without deprecated options
-    await mongoose.connect(mongoURI);
+    // Connect to MongoDB without deprecated options
+    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
     console.log("Connected to DB successfully");
 
     // Fetch the 'food_items' collection
-    const fetched_data = await mongoose.connection.db.collection("food_items").find({}).toArray();
+    global.food_items = await mongoose.connection.db.collection("food_items").find({}).toArray();
 
     // Fetch the 'foodCategory' collection
-    const foodCategoryData = await mongoose.connection.db.collection("foodCategory").find({}).toArray();
-
-    // Assign data globally
-    global.food_items = fetched_data;
-    global.foodCategory = foodCategoryData;
+    global.foodCategory = await mongoose.connection.db.collection("foodCategory").find({}).toArray();
 
     console.log("Data fetched and assigned to global variables");
   } catch (error) {
