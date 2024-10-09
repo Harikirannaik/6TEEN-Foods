@@ -9,13 +9,13 @@ export default function MyOrder() {
         const userEmail = localStorage.getItem('userEmail');
         console.log("Fetching orders for email:", userEmail); // Log the email
         try {
-            const response = await fetch("http://localhost:3100/api/myOrderData", {
+            const response = await fetch("https://6-teen-foods-api.vercel.app/api/myOrderData", {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ email: userEmail })
-            });
+              });
 
             // Log the status and response
             console.log("Response Status:", response.status);

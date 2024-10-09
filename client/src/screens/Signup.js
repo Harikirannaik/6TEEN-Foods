@@ -21,7 +21,7 @@ export default function Signup() {
         location: credentials.location,
       })
     );
-    const response = await fetch("http://localhost:3100/api/createuser", {
+    const response = await fetch("https://6-teen-foods-api.vercel.app/api/createuser", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -33,6 +33,7 @@ export default function Signup() {
         location: credentials.location,
       }),
     });
+    
     const json = await response.json();
     console.log(json);
 
