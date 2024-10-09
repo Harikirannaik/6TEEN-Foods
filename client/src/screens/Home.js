@@ -3,13 +3,17 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 
+
+// Use the API_BASE_URL from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3100';
+
 export default function Home() {
   const [search, setSearch] = useState("");
   const [foodCat, setFoodCat] = useState([]);
   const [foodItem, setFoodItem] = useState([]);
 
   const loadData = async () => {
-    let response = await fetch("http://localhost:3100/api/foodData", {
+    let response = await fetch(`${API_BASE_URL}/api/foodData`, { // Use the dynamic base URL
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +23,6 @@ export default function Home() {
     response = await response.json();
     setFoodItem(response[0]);
     setFoodCat(response[1]);
-    // console.log(response[0],response[1]);
   };
 
   useEffect(() => {
@@ -51,15 +54,11 @@ export default function Home() {
                     setSearch(e.target.value);
                   }}
                 />
-                {/* <button className="btn btn-warning" type="submit">
-                Search
-              </button> */}
               </div>
             </div>
             <div className="carousel-item active">
               <img
-                src="https://i.ibb.co/LxXw4n1/starter.jpg[/img][/url]
-                [url=https://imgbb.com/]upload picture without account[/url]"
+                src="https://i.ibb.co/LxXw4n1/starter.jpg"
                 className="d-block w-100"
                 alt="..."
                 style={{
@@ -70,8 +69,7 @@ export default function Home() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.ibb.co/NF0j0pj/pizza.jpg[/img][/url]
-                [url=https://imgbb.com/]upload picture without account[/url]"
+                src="https://i.ibb.co/NF0j0pj/pizza.jpg"
                 className="d-block w-100"
                 alt="..."
                 style={{ filter: "brightness(60%)", maxHeight: "400px" }}
@@ -79,8 +77,7 @@ export default function Home() {
             </div>
             <div className="carousel-item">
               <img
-                src="https://i.ibb.co/Pckth7G/biryani.jpg[/img][/url]
-                [url=https://imgbb.com/]upload picture without account[/url]"
+                src="https://i.ibb.co/Pckth7G/biryani.jpg"
                 className="d-block w-100"
                 alt="..."
                 style={{ filter: "brightness(60%)", maxHeight: "400px" }}
@@ -135,7 +132,7 @@ export default function Home() {
                             className="col-12 col-md-6 col-lg-4"
                           >
                             <Card
-                              foodItem={filterItems} // Pass filterItems as foodItem
+                              foodItem={filterItems}
                               foodName={filterItems.name}
                               options={filterItems.options[0]}
                               ImgSrc={filterItems.img}
