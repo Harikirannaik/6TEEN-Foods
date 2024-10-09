@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const mongoose = require('mongoose')
 const port = 3100;
 const mongoDB = require('./db');
 const cors = require('cors');
@@ -15,6 +16,12 @@ app.use(cors({
 
 // Middleware to parse JSON
 app.use(express.json());
+
+mongoose.connect('mongodb+srv://The6TEENFlavours:The6TEENFlavours@the6teenflavours.5zilf.mongodb.net/The6TEENFlavours?retryWrites=true&w=majority')
+
+app.get('/', (req, res) => {
+  res.json("Hello");
+})
 
 // CORS middleware
 app.use((req, res, next) => {
