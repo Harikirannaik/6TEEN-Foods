@@ -1,12 +1,12 @@
+require('dotenv').config(); // Load environment variables
 const mongoose = require("mongoose");
 
-const mongoURI =
-  "mongodb+srv://The6TEENFlavours:The6TEENFlavours@the6teenflavours.5zilf.mongodb.net/The6TEENFlavours?retryWrites=true&w=majority";
+const mongoURI = process.env.MONGODB_URI; // Use the URI from .env
 
 const mongoDB = async () => {
   try {
     // Await the connection without deprecated options
-    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(mongoURI);
 
     console.log("Connected to DB successfully");
 

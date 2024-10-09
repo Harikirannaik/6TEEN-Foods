@@ -9,13 +9,13 @@ export default function Home() {
   const [foodItem, setFoodItem] = useState([]);
 
   const loadData = async () => {
-    let response = await fetch("https://6-teen-foods-api.vercel.app/api/foodData", {
+    let response = await fetch("http://localhost:3100/api/foodData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     });
-  
+
     response = await response.json();
     setFoodItem(response[0]);
     setFoodCat(response[1]);

@@ -17,20 +17,18 @@ export default function Login() {
         password: credentials.password,
       })
     );
+    const response = await fetch("http://localhost:3100/api/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
 
-    const response = await fetch("https://6-teen-foods-api.vercel.app/api/login", {
-  method: "POST",
-  headers: {
-    "content-type": "application/json",
-  },
-  body: JSON.stringify({
-    email: credentials.email,
-    password: credentials.password,
-  }),
-});
-
-
-
+    
     const json = await response.json();
     console.log(json);
 

@@ -17,7 +17,7 @@ app.use(cors({
 // Middleware to parse JSON
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://The6TEENFlavours:The6TEENFlavours@the6teenflavours.5zilf.mongodb.net/The6TEENFlavours?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get('/', (req, res) => {
   res.json("Hello");
