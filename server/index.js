@@ -1,6 +1,7 @@
 const express = require("express");
+const mongoose = require('mongoose');
 const cors = require('cors');
-const mongoDB = require('./db'); // Import the DB connection function
+const mongoDB = require('./db'); // Assuming this handles the DB connection
 require('dotenv').config(); // Load environment variables
 
 const app = express();
@@ -18,6 +19,11 @@ app.use(cors({
 
 // Middleware to parse JSON
 app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to DB successfully"))
+  .catch(err => console.error("Error connecting to the database:", err));
 
 // Simple test route
 app.get('/', (req, res) => {
