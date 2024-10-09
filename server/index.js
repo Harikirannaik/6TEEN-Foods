@@ -2,7 +2,16 @@ const express = require("express");
 const app = express();
 const port = 3100;
 const mongoDB = require('./db');
+const cors = require('cors');
 mongoDB();
+
+app.use(cors({
+  origin: ["https://6-teen-foods-backend.vercel.app", "http://localhost:3000"],
+  methods: ["POST", "GET"],
+  credentials: true
+}));
+
+
 
 // Middleware to parse JSON
 app.use(express.json());
