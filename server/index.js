@@ -28,7 +28,6 @@ mongoose.connect(process.env.MONGODB_URI)
 // Simple test route
 app.get('/', (req, res) => {
   res.json("Hello");
-  res.json(MONGODB_URI)
 });
 
 // API Routes
